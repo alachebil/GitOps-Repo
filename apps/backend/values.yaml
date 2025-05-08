@@ -118,7 +118,8 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector: {}
+nodeSelector: 
+  kubernetes.io/hostname: k8s-worker2
 
 tolerations: []
 
