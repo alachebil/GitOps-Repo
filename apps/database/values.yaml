@@ -133,7 +133,6 @@ affinity:
               operator: In
               values:
                 - k8s-worker2
-                - k8s-worker3
     preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 100
         preference:
