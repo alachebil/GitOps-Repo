@@ -13,6 +13,8 @@ spec:
       labels:
         app: mysql-db
     spec:
+      affinity:
+        {{ .Values.affinity | nindent 8 }}
       containers:
         - name: mysql
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
