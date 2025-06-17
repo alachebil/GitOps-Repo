@@ -12,7 +12,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 # This is the API URL that will be used by the Angular app
-apiUrl: "http://my-spring-app:8060"
+apiUrl: "http://my-spring-app:8089"
 
 serviceAccount:
   create: false
