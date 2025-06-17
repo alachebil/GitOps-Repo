@@ -1,0 +1,71 @@
+replicaCount: 3
+
+image:
+  repository: 192.168.1.192:8082/my-angular-app-ala
+  tag: "latest"
+  pullPolicy: Always
+
+# Name of the image pull secret to use
+imagePullSecrets: nexus-registry-secret
+
+nameOverride: ""
+fullnameOverride: ""
+
+# This is the API URL that will be used by the Angular app
+apiUrl: "http://my-spring-app:8060"
+
+serviceAccount:
+  create: false
+  name: ""
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080  # Choose a port in the range 30000-32767
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - my-angular-app-ala
+        topologyKey: "kubernetes.io/hostname"
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: "kubernetes.io/hostname"
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/name: my-angular-app-ala
+
