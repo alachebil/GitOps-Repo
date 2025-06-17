@@ -6,7 +6,7 @@ image:
   pullPolicy: Always
 
 # Name of the image pull secret to use
-imagePullSecrets: nexus-registry-secret
+imagePullSecrets: crednexus
 
 nameOverride: ""
 fullnameOverride: ""
