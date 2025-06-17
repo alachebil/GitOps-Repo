@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tp-foyer-backend
+  name: my-spring-app-ala
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: tp-foyer-backend
+      app: my-spring-app-ala
   template:
     metadata:
       labels:
-        app: tp-foyer-backend
+        app: my-spring-app-ala
     spec:
       containers:
         - name: backend
