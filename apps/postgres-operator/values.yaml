@@ -7,7 +7,7 @@ openEBS:
   pathPattern: "<ns>/<pvc-name>"
   reclaimPolicy: Delete
   storageClass:
-    name: "openebs-hostpath"
+    name: "openebs-hostpathala"
     provisioner: "openebs.io/local"
     volumeBindingMode: "WaitForFirstConsumer"
 
