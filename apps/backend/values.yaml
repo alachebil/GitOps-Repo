@@ -126,8 +126,6 @@ tolerations: []
 
 affinity: {}
 
-envFromSecret: postgres-db-secret
-envFromConfigMap: postgres-db-config
 
 env:
   - name: SPRING_DATASOURCE_URL
