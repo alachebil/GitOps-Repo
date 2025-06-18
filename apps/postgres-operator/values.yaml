@@ -1,0 +1,29 @@
+# OpenEBS Configuration
+openEBS:
+  enabled: true
+  storageType: "hostpath"    # Use "hostpath" for testing; "device" or "zfs" otherwise
+  basePath: "/var/openebs/local/test" # Point to default namespace
+  # Creates subdirs: <namespace>/<pvc-name>
+  pathPattern: "<ns>/<pvc-name>"
+  reclaimPolicy: Delete
+  storageClass:
+    name: "openebs-hostpath"
+    provisioner: "openebs.io/local"
+    volumeBindingMode: "WaitForFirstConsumer"
+
+# If you need static PVs instead of dynamic:
+persistentVolumes:
+  enabled: false
+  workers:
+    - name: worker1
+      hostname: k8s-worker
+      storage: 1Gi
+      path: /postgres-data
+    - name: worker2
+      hostname: k8s-worker2
+      storage: 1Gi
+      path: /postgres-data
+    - name: worker3
+      hostname: k8s-worker3
+      storage: 1Gi
+      path: /postgres-data

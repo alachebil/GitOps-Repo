@@ -1,0 +1,6 @@
+apiVersion: v2
+name: zalando-postgres
+description: Zalando Postgres Operator with OpenEBS
+type: application
+version: 1.0.0
+appVersion: "1.10.0"

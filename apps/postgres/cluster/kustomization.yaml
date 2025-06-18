@@ -1,4 +1,0 @@
-resources:
-  - zalando-postgres-cluster.yaml
-  - pv.yaml
-  - postgres-secret.yaml

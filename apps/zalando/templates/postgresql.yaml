@@ -1,0 +1,44 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: ha-postgres
+  namespace: zalando-postgres
+spec:
+  teamId: "ha-team"
+  numberOfInstances: 3
+  enableConnectionPooler: true
+  connectionPooler:
+    mode: transaction
+  volume:
+    storageClass: openebs-hostpath
+    size: 10Gi
+  postgresql:
+    version: "14"
+    parameters:
+      #synchronous_commit: "on"
+      synchronous_commit: "remote_apply"
+      synchronous_standby_names: "ANY 1 (*)"
+  # Add database and user configuration
+  databases:
+    myapp: myapp  # database_name: owner_user
+  users:
+    myapp:
+      - createdb
+      - login
+  # Set custom password (optional - Zalando creates random passwords by default)
+  env:
+    - name: PGPASSWORD_MYAPP
+      value: "postgres"  # decoded value of cG9zdGdyZXM=
+  patroni:
+    synchronous_mode: true
+    synchronous_mode_strict: true
+    ttl: 30
+    loop_wait: 5
+    retry_timeout: 8
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"

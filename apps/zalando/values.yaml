@@ -1,0 +1,5 @@
+postgresOperator:
+  enabled: true
+  image:
+    repository: registry.opensource.zalan.do/acid/postgres-operator
+    tag: v1.10.0

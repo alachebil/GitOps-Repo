@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-db-config
-  namespace: argocd
-data:
-  POSTGRES_DB: mydb
-  POSTGRES_HOST: postgres-ha
-  POSTGRES_PORT: "5432"
