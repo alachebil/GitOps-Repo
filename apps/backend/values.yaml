@@ -126,6 +126,9 @@ tolerations: []
 
 affinity: {}
 
+envFromSecret: postgres-db-secret
+envFromConfigMap: postgres-db-config
+
 env:
   - name: SPRING_DATASOURCE_URL
     value: jdbc:mysql://mysql-db:3306/tpfoyer_db?createDatabaseIfNotExist=true

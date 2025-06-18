@@ -23,3 +23,12 @@ spec:
             - name: {{ .name }}
               value: "{{ .value }}"
             {{- end }}
+          envFrom:
+            {{- if .Values.envFromSecret }}
+            - secretRef:
+                name: {{ .Values.envFromSecret }}
+            {{- end }}
+            {{- if .Values.envFromConfigMap }}
+            - configMapRef:
+                name: {{ .Values.envFromConfigMap }}
+            {{- end }}
