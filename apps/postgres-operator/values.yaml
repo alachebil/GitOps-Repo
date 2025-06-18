@@ -2,7 +2,7 @@
 openEBS:
   enabled: true
   storageType: "hostpath"    # Use "hostpath" for testing; "device" or "zfs" otherwise
-  basePath: "/var/openebs/local/test" # Point to default namespace
+  basePath: "/var/openebs/local/test1" # Point to default namespace
   # Creates subdirs: <namespace>/<pvc-name>
   pathPattern: "<ns>/<pvc-name>"
   reclaimPolicy: Delete
