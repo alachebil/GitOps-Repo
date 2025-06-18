@@ -2,7 +2,7 @@ apiVersion: acid.zalan.do/v1
 kind: postgresql
 metadata:
   name: ha-postgres
-  namespace: argocd
+  namespace: zalando-postgres
 spec:
   teamId: "ha-team"
   numberOfInstances: 3
@@ -10,7 +10,7 @@ spec:
   connectionPooler:
     mode: transaction
   volume:
-    storageClass: openebs-hostpathala
+    storageClass: openebs-hostpath
     size: 10Gi
   postgresql:
     version: "14"
