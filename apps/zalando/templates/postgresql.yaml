@@ -10,7 +10,7 @@ spec:
   connectionPooler:
     mode: transaction
   volume:
-    storageClass: openebs-hostpath
+    storageClass: openebs-hostpathala
     size: 10Gi
   postgresql:
     version: "14"
