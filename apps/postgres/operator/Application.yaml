@@ -1,22 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mysql-operator
+  name: postgres-operator
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://ot-container-kit.github.io/helm-charts
-    chart: mysql-operator
-    targetRevision: 1.1.1
-    helm:
-      valueFiles:
-        - values.yaml
+    repoURL: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+    chart: postgres-operator
+    targetRevision: 1.10.0
   destination:
     server: https://kubernetes.default.svc
-    namespace: mysql-operator
+    namespace: postgres-operator
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
