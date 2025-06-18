@@ -7,7 +7,7 @@ openEBS:
   pathPattern: "<ns>/<pvc-name>"
   reclaimPolicy: Delete
   storageClass:
-    name: "openebs-hostpathala"
+    name: "openebs-hostpath"
     provisioner: "openebs.io/local"
     volumeBindingMode: "WaitForFirstConsumer"
 
@@ -16,14 +16,14 @@ persistentVolumes:
   enabled: false
   workers:
     - name: worker1
-      hostname: k8s-worker
+      hostname: k8s-worker4
       storage: 1Gi
       path: /postgres-data
     - name: worker2
-      hostname: k8s-worker2
+      hostname: k8s-worker5
       storage: 1Gi
       path: /postgres-data
     - name: worker3
-      hostname: k8s-worker3
+      hostname: k8s-worker6
       storage: 1Gi
       path: /postgres-data
