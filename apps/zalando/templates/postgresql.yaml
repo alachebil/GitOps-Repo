@@ -2,7 +2,7 @@ apiVersion: acid.zalan.do/v1
 kind: postgresql
 metadata:
   name: ha-postgres
-  namespace: zalando-postgres
+  namespace: argocd
 spec:
   teamId: "ha-team"
   numberOfInstances: 3
