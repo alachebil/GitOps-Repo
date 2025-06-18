@@ -1,0 +1,19 @@
+apiVersion: mysql.presslabs.org/v1alpha1
+kind: MysqlCluster
+metadata:
+  name: my-mysql-ha
+  namespace: argocd
+spec:
+  replicas: 3
+  secretName: mysql-root-password
+  mysqlVersion: "8.0"
+  volumeSpec:
+    persistentVolumeClaim:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: ""
+      selector:
+        matchLabels:
+          app: mysql-nfs
