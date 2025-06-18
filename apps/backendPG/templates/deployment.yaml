@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-spring-app-ala
+  name: my-spring-app-pg
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: my-spring-app-ala
+      app: my-spring-app-pg
   template:
     metadata:
       labels:
-        app: my-spring-app-ala
+        app: my-spring-app-pg
     spec:
       containers:
         - name: backend
