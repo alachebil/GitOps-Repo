@@ -6,9 +6,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/zalando/postgres-operator.git
-    targetRevision: master
-    path: manifests
+    repoURL: https://opensource.zalando.com/postgres-operator/charts
+    chart: postgres-operator
+    targetRevision: 1.11.0
+    chart: postgres-operator
   destination:
     server: https://kubernetes.default.svc
     namespace: postgres-operator
