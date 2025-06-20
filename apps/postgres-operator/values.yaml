@@ -1,23 +1,19 @@
-# Namespace configuration
-namespace: argocd
+namespace: postgres-cluster
 
-# PostgreSQL cluster configuration
 postgresql:
   clusterName: ha-postgres
   teamId: "ha-team"
   numberOfInstances: 3
   version: "14"
   
-  # Database and users
   databases:
-    myapp: myapp  # database_name: owner_user
+    myapp: myapp
   
   users:
     myapp:
       - createdb
       - login
   
-  # Resources
   resources:
     requests:
       cpu: "500m"
@@ -26,7 +22,6 @@ postgresql:
       cpu: "1"
       memory: "2Gi"
 
-# Static storage configuration (NFS)
 storage:
   enabled: true
   size: 10Gi
@@ -34,12 +29,10 @@ storage:
   nfsPath: /rpool/nfs-share/postgres
   reclaimPolicy: Retain
 
-# Connection pooler
 connectionPooler:
   enabled: true
   mode: transaction
 
-# Patroni configuration for HA
 patroni:
   synchronous_mode: true
   synchronous_mode_strict: true
@@ -47,6 +40,5 @@ patroni:
   loop_wait: 5
   retry_timeout: 8
 
-# Custom passwords (optional)
 env:
   PGPASSWORD_MYAPP: "postgres"

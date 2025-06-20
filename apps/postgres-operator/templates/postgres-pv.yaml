@@ -1,4 +1,5 @@
-{- if .Values.storage.enabled }}
+{{- if .Values.storage.enabled }}
+{{- $root := . }}
 {{- range $i := until (int .Values.postgresql.numberOfInstances) }}
 ---
 apiVersion: v1
@@ -10,12 +11,12 @@ metadata:
     instance: "{{ $i }}"
 spec:
   capacity:
-    storage: {{ $.Values.storage.size }}
+    storage: {{ $root.Values.storage.size }}
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: {{ $.Values.storage.reclaimPolicy }}
+  persistentVolumeReclaimPolicy: {{ $root.Values.storage.reclaimPolicy }}
   nfs:
-    server: {{ $.Values.storage.nfsServer }}
-    path: {{ $.Values.storage.nfsPath }}/instance-{{ $i }}
+    server: {{ $root.Values.storage.nfsServer }}
+    path: {{ $root.Values.storage.nfsPath }}/instance-{{ $i }}
 {{- end }}
 {{- end }}
