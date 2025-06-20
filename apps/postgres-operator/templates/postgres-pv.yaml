@@ -1,0 +1,21 @@
+{- if .Values.storage.enabled }}
+{{- range $i := until (int .Values.postgresql.numberOfInstances) }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv-{{ $i }}
+  labels:
+    app: postgres-cluster
+    instance: "{{ $i }}"
+spec:
+  capacity:
+    storage: {{ $.Values.storage.size }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: {{ $.Values.storage.reclaimPolicy }}
+  nfs:
+    server: {{ $.Values.storage.nfsServer }}
+    path: {{ $.Values.storage.nfsPath }}/instance-{{ $i }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,58 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: {{ .Values.postgresql.clusterName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  teamId: {{ .Values.postgresql.teamId | quote }}
+  numberOfInstances: {{ .Values.postgresql.numberOfInstances }}
+  
+  {{- if .Values.connectionPooler.enabled }}
+  enableConnectionPooler: true
+  connectionPooler:
+    mode: {{ .Values.connectionPooler.mode }}
+  {{- end }}
+  
+  volume:
+    storageClass: ""  # Utilise les PVC statiques
+    size: {{ .Values.storage.size }}
+  
+  postgresql:
+    version: {{ .Values.postgresql.version | quote }}
+    parameters:
+      synchronous_commit: "remote_apply"
+      synchronous_standby_names: "ANY 1 (*)"
+  
+  # Configuration des bases de données et utilisateurs
+  {{- if .Values.postgresql.databases }}
+  databases:
+    {{- toYaml .Values.postgresql.databases | nindent 4 }}
+  {{- end }}
+  
+  {{- if .Values.postgresql.users }}
+  users:
+    {{- toYaml .Values.postgresql.users | nindent 4 }}
+  {{- end }}
+  
+  # Variables d'environnement pour les mots de passe
+  {{- if .Values.env }}
+  env:
+    {{- range $key, $value := .Values.env }}
+    - name: {{ $key }}
+      value: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+  
+  # Configuration Patroni pour la haute disponibilité
+  patroni:
+    synchronous_mode: {{ .Values.patroni.synchronous_mode }}
+    synchronous_mode_strict: {{ .Values.patroni.synchronous_mode_strict }}
+    ttl: {{ .Values.patroni.ttl }}
+    loop_wait: {{ .Values.patroni.loop_wait }}
+    retry_timeout: {{ .Values.patroni.retry_timeout }}
+  
+  # Configuration des ressources
+  {{- if .Values.postgresql.resources }}
+  resources:
+    {{- toYaml .Values.postgresql.resources | nindent 4 }}
+  {{- end }}

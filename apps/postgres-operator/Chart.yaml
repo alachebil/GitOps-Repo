@@ -1,5 +1,6 @@
 apiVersion: v2
 name: postgres-operator
-description: Storage infrastructure for PostgreSQL on Kubernetes
-version: 0.1.0
+description: PostgreSQL cluster with Zalando operator and static NFS storage
 type: application
+version: 0.1.0
+appVersion: "14"

@@ -1,30 +1,52 @@
-# OpenEBS Configuration
-openEBS:
+# Namespace configuration
+namespace: argocd
+
+# PostgreSQL cluster configuration
+postgresql:
+  clusterName: ha-postgres
+  teamId: "ha-team"
+  numberOfInstances: 3
+  version: "14"
+  
+  # Database and users
+  databases:
+    myapp: myapp  # database_name: owner_user
+  
+  users:
+    myapp:
+      - createdb
+      - login
+  
+  # Resources
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+# Static storage configuration (NFS)
+storage:
   enabled: true
-  storageType: "hostpath"    # Use "hostpath" for testing; "device" or "zfs" otherwise
-  basePath: "/var/openebs/local/test" # Point to default namespace
-  # Creates subdirs: <namespace>/<pvc-name>
-  pathPattern: "<ns>/<pvc-name>"
-  reclaimPolicy: Delete
-  storageClass:
-    name: "openebs-hostpath"
-    provisioner: "openebs.io/local"
-    volumeBindingMode: "WaitForFirstConsumer"
+  size: 10Gi
+  nfsServer: 192.168.1.53
+  nfsPath: /rpool/nfs-share/postgres
+  reclaimPolicy: Retain
 
-# If you need static PVs instead of dynamic:
-persistentVolumes:
-  enabled: false
-  workers:
-    - name: worker1
-      hostname: k8s-worker
-      storage: 1Gi
-      path: /postgres-data
-    - name: worker2
-      hostname: k8s-worker2
-      storage: 1Gi
-      path: /postgres-data
-    - name: worker3
-      hostname: k8s-worker3
-      storage: 1Gi
-      path: /postgres-data
+# Connection pooler
+connectionPooler:
+  enabled: true
+  mode: transaction
 
+# Patroni configuration for HA
+patroni:
+  synchronous_mode: true
+  synchronous_mode_strict: true
+  ttl: 30
+  loop_wait: 5
+  retry_timeout: 8
+
+# Custom passwords (optional)
+env:
+  PGPASSWORD_MYAPP: "postgres"
