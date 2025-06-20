@@ -1,4 +1,4 @@
-namespace: postgres-cluster
+namespace: argocd
 
 postgresql:
   clusterName: ha-postgres
