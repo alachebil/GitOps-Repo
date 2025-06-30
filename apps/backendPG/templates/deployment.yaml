@@ -14,7 +14,6 @@ spec:
     spec:
       imagePullSecrets:
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
-    spec:
       containers:
         - name: backend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -24,12 +23,10 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://{{ .Values.database.host }}:{{ .Values.database.port }}/{{ .Values.database.name }}?connectTimeout=5&socketTimeout=10&tcpKeepAlive=true&prepareThreshold=0
-              #value: jdbc:postgresql://{{ .Values.database.host }}:{{ .Values.database.port }}/{{ .Values.database.name }}?targetServerType=primary&connectTimeout=5&socketTimeout=10&tcpKeepAlive=true
             - name: SPRING_DATASOURCE_USERNAME
               value: {{ .Values.database.username }}
             - name: SPRING_DATASOURCE_PASSWORD
               value: "iZ5jv14pHtZKafCpp5uKl3w3vbDxhdlpQBFK9R1zQTN3gR6OuV8QuD61OCipu6Z6"
-              
             - name: SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT
               value: "30000"
             - name: SPRING_DATASOURCE_HIKARI_MAX_LIFETIME
@@ -37,9 +34,6 @@ spec:
             - name: SPRING_DATASOURCE_HIKARI_VALIDATION_TIMEOUT
               value: "5000"
             - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
-              value: "5"  # minimum idle connections to keep ready
+              value: "5"
             - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE  
-              value: "20" # max connections, adjust per load
-
-
-          
+              value: "20"
