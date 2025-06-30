@@ -124,7 +124,7 @@ volumeMounts: []
 #   readOnly: true
 
 nodeSelector: 
-  kubernetes.io/hostname: k8s-worker2
+  kubernetes.io/hostname: K8s-worker6
 
 tolerations: []
 
