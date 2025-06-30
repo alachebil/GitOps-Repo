@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-spring-app-pg
+  name: my-spring-app-ala
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: my-spring-app-pg
+      app: my-spring-app-ala
   template:
     metadata:
       labels:
-        app: my-spring-app-pg
+        app: my-spring-app-ala
     spec:
       imagePullSecrets:
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
