@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-spring-app-pg
+  name: my-spring-app-ala
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: my-spring-app-pg
+    app: my-spring-app-ala
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 8089
