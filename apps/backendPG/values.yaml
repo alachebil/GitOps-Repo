@@ -76,12 +76,19 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+# database:
+#   host: ha-postgres-2-pooler #database.svc.cluster.local in case of change namespace
+#   port: 5432
+#   name: myapp
+#   username: postgres
+  # Password will be set from secret
 database:
-  host: ha-postgres-2-pooler #database.svc.cluster.local in case of change namespace
+  host: ha-postgres-2-pooler
   port: 5432
   name: myapp
-  username: postgres
-  # Password will be set from secret
+  username: myapp
+  password: postgres
+
 
 resources:
   limits:
